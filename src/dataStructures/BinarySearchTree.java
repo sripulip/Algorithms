@@ -28,7 +28,7 @@ public class BinarySearchTree {
 	private Node insertNode(Node node, int data) {
 		if (node == null) {
 			node = new Node(data);
-		} else if (data <= node.data) {
+		} else if (data < node.data) {
 			node.lChild = insertNode(node.lChild, data);
 		} else if (data > node.data) {
 			node.rChild = insertNode(node.rChild, data);
@@ -72,6 +72,23 @@ public class BinarySearchTree {
 		System.out.print(node.data + " ");
 	}
 
+	public boolean isBST(BinarySearchTree bst) {
+		return isBSTutil(bst.root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	}
+
+	private boolean isBSTutil(Node node, int minValue, int maxValue) {
+
+		if (node == null)
+			return true;
+
+		if ((node.data > minValue) && (node.data < maxValue)
+				&& isBSTutil(node.lChild, minValue, node.data)
+				&& isBSTutil(node.rChild, node.data, maxValue))
+			return true;
+		else
+			return false;
+	}
+
 	public static void main(String[] args) {
 		BinarySearchTree bst = new BinarySearchTree();
 		int[] input = { 8, 3, 1, 6, 4, 7, 10, 14, 13 };
@@ -79,5 +96,6 @@ public class BinarySearchTree {
 			bst.insert(input[i]);
 		}
 		bst.print();
+		System.out.println("\n\n" + bst.isBST(bst));
 	}
 }
