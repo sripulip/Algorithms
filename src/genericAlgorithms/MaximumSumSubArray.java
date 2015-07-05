@@ -1,7 +1,5 @@
 package genericAlgorithms;
 
-import java.util.ArrayList;
-
 public class MaximumSumSubArray {
 
 	public static void main(String[] args) {
@@ -23,27 +21,18 @@ public class MaximumSumSubArray {
 	}
 
 	public static void kadaneAlgorithm() {
-		// int[] a = { 1, -3, 2, -5, 7, 6, -1, -4, 11, -23 };
 		int[] a = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
 		int ans = Integer.MIN_VALUE;
 		int sum = 0;
-		ArrayList<Integer> subArray = new ArrayList<>();
 
 		for (int i = 0; i < a.length; i++) {
 			if (sum + a[i] > 0) {
-				if (sum == 0 || ((sum + a[i]) < sum)) {
-					subArray.clear();
-				}
 				sum += a[i];
-				subArray.add(a[i]);
 			} else {
 				sum = 0;
 			}
 			ans = (sum > ans) ? sum : ans;
 		}
-		for (int num : subArray) {
-			System.out.print(num + ", ");
-		}
-		System.out.print(": " + ans);
+		System.out.print(ans);
 	}
 }

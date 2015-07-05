@@ -15,6 +15,9 @@ class BinarySearch {
 			System.out.println("Element " + input + " is positioned at "
 					+ output);
 		}
+
+		int[] a = { 2, 4, 6, 10, 10, 18, 20, 45, 68, 70, 75, 90, 100 };
+		System.out.println("Index: " + binarySearch(a, 10, 0, a.length - 1));
 	}
 
 	public static int binarySearch(int input) {
@@ -30,5 +33,20 @@ class BinarySearch {
 				return mid + 1;
 		} while (low <= high);
 		return -1;
+	}
+
+	public static int binarySearch(int[] array, int num, int low, int high) {
+
+		if (low > high) {
+			return -1;
+		} else {
+			int mid = (low + high) / 2;
+			if (num == array[mid])
+				return mid;
+			else if (num < array[mid]) {
+				return binarySearch(array, num, low, mid - 1);
+			}
+			return binarySearch(array, num, mid + 1, high);
+		}
 	}
 }
