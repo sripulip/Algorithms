@@ -7,7 +7,7 @@ class QuickSort {
 	public static void main(String[] args) {
 
 		int[] a = { 17, 12, 6, 19, 23, 8, 5, 10 };
-		System.out.println("Input Array: " + Arrays.toString(a));
+		System.out.println("Input Array:\n" + Arrays.toString(a));
 		quickSort(a, 0, a.length - 1);
 		System.out.println("\nSorted Array: " + Arrays.toString(a));
 
@@ -40,6 +40,7 @@ class QuickSort {
 				i++;
 				j--;
 			}
+			System.out.println(Arrays.toString(a));
 		}
 		return j;
 	}
