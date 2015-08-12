@@ -72,8 +72,8 @@ public class BinarySearchTree {
 		System.out.print(node.data + " ");
 	}
 
-	public boolean isBST(BinarySearchTree bst) {
-		return isBSTutil(bst.root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	public boolean isBST() {
+		return isBSTutil(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 
 	private boolean isBSTutil(Node node, int minValue, int maxValue) {
@@ -81,12 +81,23 @@ public class BinarySearchTree {
 		if (node == null)
 			return true;
 
-		if ((node.data > minValue) && (node.data < maxValue)
+		return (node.data > minValue && node.data < maxValue)
 				&& isBSTutil(node.lChild, minValue, node.data)
-				&& isBSTutil(node.rChild, node.data, maxValue))
-			return true;
-		else
-			return false;
+				&& isBSTutil(node.rChild, node.data, maxValue);
+	}
+
+	public void mirrorTree() {
+		mirrorTreeUtil(root);
+	}
+
+	private void mirrorTreeUtil(Node node) {
+		if (node != null) {
+			mirrorTreeUtil(node.lChild);
+			mirrorTreeUtil(node.rChild);
+			Node temp = node.lChild;
+			node.lChild = node.rChild;
+			node.rChild = temp;
+		}
 	}
 
 	public static void main(String[] args) {
@@ -95,7 +106,11 @@ public class BinarySearchTree {
 		for (int i = 0; i < input.length; i++) {
 			bst.insert(input[i]);
 		}
+		System.out.println("Binary Tree:\n");
 		bst.print();
-		System.out.println("\n\n" + bst.isBST(bst));
+		System.out.println("\n\nIs BST? " + bst.isBST() + "\n");
+		bst.mirrorTree();
+		System.out.println("Mirror Tree:\n");
+		bst.print();
 	}
 }
